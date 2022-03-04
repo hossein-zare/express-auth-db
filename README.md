@@ -5,7 +5,7 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const crypto = require('crypto');
-const { setup, authenticate, checkAuthenticated, checkNotAuthenticated } = require('express-auth-db');
+const { setup, authenticate, login, logout, checkAuthenticated, checkNotAuthenticated } = require('express-auth-db');
 
 // models
 const Auth = require('./models/auth');
