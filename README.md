@@ -46,7 +46,7 @@ app.use(cookieParser());
 app.use(authenticate);
 
 app.post('/login', checkNotAuthenticated, async (req, res) => {
-    const user = await User.findOne(...);
+    const user = await User.findOne({ username: req.body.username });
 
     if (user && user.checkPassword(req.body.password)) {
         await login(user._id, res);
