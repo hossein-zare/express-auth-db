@@ -65,7 +65,7 @@ export function checkAuthenticated(req, res, next) {
     if (req.is_authenticated) {
         next();
     } else {
-        res.redirect('/');
+        res.redirect(config.redirectAuthenticated);
     }
 }
 
@@ -73,6 +73,6 @@ export function checkNotAuthenticated(req, res, next) {
     if (! req.is_authenticated) {
         next();
     } else {
-        res.redirect('/');
+        res.redirect(config.redirectUnauthenticated);
     }
 }
