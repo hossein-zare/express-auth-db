@@ -42,17 +42,13 @@ async function authenticate(req, res, next) {
 }
 
 function authenticated(req, next, user) {
-    // @ts-ignore
     req.user = user;
-    
-    // @ts-ignore
     req.is_authenticated = true;
 
     next();
 }
 
 function unauthenticated(req, res, next, clear = true) {
-    // @ts-ignore
     req.is_authenticated = false;
     
     if (clear) {
