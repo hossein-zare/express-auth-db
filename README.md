@@ -80,3 +80,13 @@ app.listen(PORT, () => {
     console.log(`Server is running at https://localhost:${PORT}`);
 });
 ```
+
+## User in views
++ myView.pug
+    
+    ```pug
+    if is_authenticated
+        #{user.name}
+    else
+        p Please log in...
+    ```
