@@ -1,31 +1,33 @@
-const callbacks = {
+const config = {
     createAuth: null,
     checkAuth: null,
-    findUser: null,
+    getUser: null,
     setCookie: null,
-    randomKey: null
+    randomKey: null,
+    redirectAuthenticated: '/',
+    redirectUnauthenticated: '/',
 };
 
 export function setup(opt) {
-    Object.assign(callbacks, opt);
+    Object.assign(config, opt);
 }
 
 export async function login(id, res) {
-    const key = await callbacks.randomKey();
+    const key = await config.randomKey();
 
-    await callbacks.createAuth(id, key);
+    await config.createAuth(id, key);
 
-    callbacks.setCookie(res, key);
+    config.setCookie(res, key);
 
     return true;
 }
 
 export async function authenticate(req, res, next) {
     if (req.cookies.key) {
-        const auth = await callbacks.checkAuth(req.cookies.key)
+        const auth = await config.checkAuth(req.cookies.key)
 
         if (auth) {
-            const user = await callbacks.findUser(auth?.user_id);
+            const user = await config.getUser(auth?.user_id);
 
             if (user) {
                 return authenticated(req, next, user);

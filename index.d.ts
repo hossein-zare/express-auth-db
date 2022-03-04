@@ -10,6 +10,8 @@ interface Opt {
     createAuth: (id: any, key: string) => PromiseLike<any>;
     checkAuth: (key: string) => PromiseLike<any>;
     getUser: (id: any) => PromiseLike<any>;
-    setCookie: (res: Response, key: string) => any,
+    setCookie: (res: Response, key: string) => any;
     randomKey: () => Promise<string> | string;
+    redirectAuthenticated: string;
+    redirectUnauthenticated: string;
 }
