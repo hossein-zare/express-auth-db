@@ -2,6 +2,7 @@ const config = {
     cookieName: 'key',
     createAuth: null,
     checkAuth: null,
+    deleteAuth: null,
     getUser: null,
     setCookie: null,
     randomKey: null,
@@ -21,6 +22,18 @@ async function login(id, res) {
     config.setCookie(res, key);
 
     return true;
+}
+
+async function logout(req, res) {
+    if (req.cookies?.[config.cookieName]) {
+        await config.deleteAuth(req.cookies[config.cookieName]);
+
+        res.clearCookie(config.cookieName);
+
+        return true;
+    }
+
+    return false;
 }
 
 async function authenticate(req, res, next) {
@@ -81,6 +94,7 @@ function checkNotAuthenticated(req, res, next) {
 module.exports = {
     setup,
     login,
+    logout,
     authenticate,
     checkAuthenticated,
     checkNotAuthenticated

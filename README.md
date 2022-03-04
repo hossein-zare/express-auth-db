@@ -32,6 +32,7 @@ setup({
             user_id: 1
         });
     },
+    deleteAuth: (key) => Auth.deleteOne({ key }),
     getUser: (id) => User.findById(id),
     setCookie: (res, key) => {
         res.cookie('key', key, {
@@ -62,6 +63,12 @@ app.post('/login', checkNotAuthenticated, async (req, res) => {
     } else {
         res.send('error');
     }
+});
+
+app.post('/logout', checkAuthenticated, (req, res) => {
+    await logout(req, res);
+
+    res.redirect('/');
 });
 
 app.get('/check', (req, res) => {
