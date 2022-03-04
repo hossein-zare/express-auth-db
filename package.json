@@ -1,6 +1,6 @@
 {
   "name": "express-auth-db",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Authentication using cookies and database.",
   "keywords": [
     "express", "expressjs", "auth", "authentication", "cookie", "login", "database"
@@ -12,12 +12,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hossein-zare/crypto-helper.git"
+    "url": "git+https://github.com/hossein-zare/express-auth-db.git"
   },
   "author": "Hossein Zare",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/hossein-zare/crypto-helper/issues"
+    "url": "https://github.com/hossein-zare/express-auth-db/issues"
   },
-  "homepage": "https://github.com/hossein-zare/crypto-helper"
+  "homepage": "https://github.com/hossein-zare/express-auth-db"
 }
