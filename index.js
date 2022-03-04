@@ -31,7 +31,7 @@ async function authenticate(req, res, next) {
             const user = await config.getUser(auth?.user_id);
 
             if (user) {
-                return authenticated(req, next, user);
+                return authenticated(req, res, next, user);
             }
         }
 
@@ -41,15 +41,19 @@ async function authenticate(req, res, next) {
     return unauthenticated(req, res, next, false);
 }
 
-function authenticated(req, next, user) {
+function authenticated(req, res, next, user) {
     req.user = user;
+    res.locals.user = user;
+    
     req.is_authenticated = true;
+    res.locals.is_authenticated = true;
 
     next();
 }
 
 function unauthenticated(req, res, next, clear = true) {
     req.is_authenticated = false;
+    res.locals.is_authenticated = false;
     
     if (clear) {
         res.clearCookie(config.cookieName);
