@@ -28,6 +28,8 @@ setup({
             expires_at: {
                 $gt: Date.now()
             }
+        }, {
+            user_id: 1
         });
     },
     getUser: (id) => User.findById(id),
@@ -36,11 +38,13 @@ setup({
             expires: new Date(Date.now() + 3155695200000) // 100 years
         });
     },
-    randomKey: () => new Promise((resolve, reject) => crypto.randomBytes(64, (e, buf) => {
-        if (e) return reject(e);
+    randomKey: () => {
+        return new Promise((resolve, reject) => crypto.randomBytes(64, (e, buf) => {
+            if (e) return reject(e);
 
-        resolve(buf.toString('hex'));
-    })),
+            resolve(buf.toString('hex'));
+        }));
+    },
     redirectAuthenticated: '/profile',
     redirectUnauthenticated: '/login',
 });
