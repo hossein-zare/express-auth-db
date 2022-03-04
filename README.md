@@ -41,8 +41,8 @@ setup({
 
         resolve(buf.toString('hex'));
     })),
-    redirectAuthenticated: '/',
-    redirectUnauthenticated: '/',
+    redirectAuthenticated: '/profile',
+    redirectUnauthenticated: '/login',
 });
 
 app.use(cookieParser());
