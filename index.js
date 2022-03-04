@@ -9,11 +9,11 @@ const config = {
     redirectUnauthenticated: '/',
 };
 
-export function setup(opt) {
+function setup(opt) {
     Object.assign(config, opt);
 }
 
-export async function login(id, res) {
+async function login(id, res) {
     const key = await config.randomKey();
 
     await config.createAuth(id, key);
@@ -23,7 +23,7 @@ export async function login(id, res) {
     return true;
 }
 
-export async function authenticate(req, res, next) {
+async function authenticate(req, res, next) {
     if (req.cookies?.[config.cookieName]) {
         const auth = await config.checkAuth(req.cookies[config.cookieName])
 
@@ -62,7 +62,7 @@ function unauthenticated(req, res, next, clear = true) {
     next();
 }
 
-export function checkAuthenticated(req, res, next) {
+function checkAuthenticated(req, res, next) {
     if (req.is_authenticated) {
         next();
     } else {
@@ -70,10 +70,18 @@ export function checkAuthenticated(req, res, next) {
     }
 }
 
-export function checkNotAuthenticated(req, res, next) {
+function checkNotAuthenticated(req, res, next) {
     if (! req.is_authenticated) {
         next();
     } else {
         res.redirect(config.redirectAuthenticated);
     }
 }
+
+module.exports = {
+    setup,
+    login,
+    authenticate,
+    checkAuthenticated,
+    checkNotAuthenticated
+};
