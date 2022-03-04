@@ -15,6 +15,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 setup({
+    cookieName: 'key',
     createAuth: (id, key) => {
         return Auth.create({
             user_id: id,
@@ -30,9 +31,11 @@ setup({
         });
     },
     getUser: (id) => User.findById(id),
-    setCookie: (res, key) => res.cookie('key', key, {
-        expires: new Date(Date.now() + 3155695200000) // 100 years
-    }),
+    setCookie: (res, key) => {
+        res.cookie('key', key, {
+            expires: new Date(Date.now() + 3155695200000) // 100 years
+        });
+    },
     randomKey: () => new Promise((resolve, reject) => crypto.randomBytes(64, (e, buf) => {
         if (e) return reject(e);
 

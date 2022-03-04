@@ -1,4 +1,5 @@
 const config = {
+    cookieName: 'key',
     createAuth: null,
     checkAuth: null,
     getUser: null,
@@ -23,8 +24,8 @@ export async function login(id, res) {
 }
 
 export async function authenticate(req, res, next) {
-    if (req.cookies.key) {
-        const auth = await config.checkAuth(req.cookies.key)
+    if (req.cookies?.[config.cookieName]) {
+        const auth = await config.checkAuth(req.cookies[config.cookieName])
 
         if (auth) {
             const user = await config.getUser(auth?.user_id);
@@ -55,7 +56,7 @@ function unauthenticated(req, res, next, clear = true) {
     req.is_authenticated = false;
     
     if (clear) {
-        res.clearCookie('key');
+        res.clearCookie(config.cookieName);
     }
 
     next();
