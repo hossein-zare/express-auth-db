@@ -50,11 +50,11 @@ app.post('/login', checkNotAuthenticated, async (req, res) => {
 
     if (user && user.checkPassword(req.body.password)) {
         await login(user._id, res);
+
+        res.send('ok');
     } else {
         res.send('error');
     }
-
-    res.send('ok');
 });
 
 app.get('/check', checkAuthenticated, (req, res) => {
