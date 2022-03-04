@@ -98,7 +98,7 @@ app.listen(PORT, () => {
 ```
 
 ## User in views
-+ myView.pug
++ view.pug
     
     ```pug
     if is_authenticated

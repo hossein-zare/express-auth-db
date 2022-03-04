@@ -1,7 +1,7 @@
 {
   "name": "express-auth-db",
   "version": "1.0.8",
-  "description": "Authentication using cookies and database.",
+  "description": "Authentication using cookies and database in Express.js.",
   "keywords": [
     "express", "expressjs", "auth", "authentication", "cookie", "login", "database"
   ],
