@@ -5,7 +5,14 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const crypto = require('crypto');
-const { setup, authenticate, login, logout, checkAuthenticated, checkNotAuthenticated } = require('express-auth-db');
+const {
+    setup,
+    authenticate,
+    login,
+    logout,
+    checkAuthenticated,
+    checkNotAuthenticated
+} = require('express-auth-db');
 
 // models
 const Auth = require('./models/auth');
@@ -40,10 +47,12 @@ setup({
         });
     },
     randomKey: () => {
-        return new Promise((resolve, reject) => crypto.randomBytes(64, (e, buf) => {
-            if (e) return reject(e);
+        return new Promise((resolve, reject) => {
+            crypto.randomBytes(64, (e, buf) => {
+                if (e) return reject(e);
 
-            resolve(buf.toString('hex'));
+                resolve(buf.toString('hex'));
+            }
         }));
     },
     redirectAuthenticated: '/profile',
