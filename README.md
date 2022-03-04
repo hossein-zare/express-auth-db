@@ -57,7 +57,15 @@ app.post('/login', checkNotAuthenticated, async (req, res) => {
     }
 });
 
-app.get('/check', checkAuthenticated, (req, res) => {
+app.get('/check', (req, res) => {
+    if (req.is_authenticated) {
+        res.send(':)');
+    } else {
+        res.send(':(');
+    }
+});
+
+app.get('/profile', checkAuthenticated, (req, res) => {
     res.send(`name: ${req.user.name}`);
 });
 
