@@ -36,7 +36,7 @@ setup({
     randomKey: () => new Promise((resolve, reject) => crypto.randomBytes(64, (e, buf) => {
         if (e) return reject(e);
 
-        resolve(buf.toString('hex));
+        resolve(buf.toString('hex'));
     })),
     redirectAuthenticated: '/',
     redirectUnauthenticated: '/',
