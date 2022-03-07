@@ -23,20 +23,16 @@ const PORT = process.env.PORT || 3000;
 
 setup({
     cookieName: 'key',
-    createAuth: (id, key) => {
-        return Auth.create({
-            user_id: id,
-            key,
-        });
-    },
+    authUserIdField: 'userId',
+    createAuth: (userId, key) => Auth.create({ userId, key, })
     checkAuth: (key) => {
         return Auth.findOne({
             key,
-            expires_at: {
+            expiresAt: {
                 $gt: Date.now()
             }
         }, {
-            user_id: 1
+            userId: 1
         });
     },
     deleteAuth: (key) => Auth.deleteOne({ key }),
@@ -81,7 +77,7 @@ app.post('/logout', checkAuthenticated, (req, res) => {
 });
 
 app.get('/check', (req, res) => {
-    if (req.is_authenticated) {
+    if (req.isAuthenticated) {
         res.send(':)');
     } else {
         res.send(':(');
@@ -101,7 +97,7 @@ app.listen(PORT, () => {
 + view.pug
     
     ```pug
-    if is_authenticated
+    if isAuthenticated
         #{user.name}
     else
         p Please log in...

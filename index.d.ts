@@ -9,6 +9,7 @@ export function setup(opt: Opt): void;
 
 interface Opt {
     cookieName?: string,
+    authUserIdField?: string,
     createAuth: (id: any, key: string) => PromiseLike<any>;
     checkAuth: (key: string) => PromiseLike<any>;
     deleteAuth: (key: string) => PromiseLike<any>;

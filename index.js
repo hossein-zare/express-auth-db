@@ -1,5 +1,6 @@
 const config = {
     cookieName: 'key',
+    authUserIdField: 'userId',
     createAuth: null,
     checkAuth: null,
     deleteAuth: null,
@@ -41,7 +42,7 @@ async function authenticate(req, res, next) {
         const auth = await config.checkAuth(req.cookies[config.cookieName])
 
         if (auth) {
-            const user = await config.getUser(auth?.user_id);
+            const user = await config.getUser(auth?.[config.authUserIdField]);
 
             if (user) {
                 return authenticated(req, res, next, user);
@@ -58,15 +59,15 @@ function authenticated(req, res, next, user) {
     req.user = user;
     res.locals.user = user;
     
-    req.is_authenticated = true;
-    res.locals.is_authenticated = true;
+    req.isAuthenticated = true;
+    res.locals.isAuthenticated = true;
 
     next();
 }
 
 function unauthenticated(req, res, next, clear = true) {
-    req.is_authenticated = false;
-    res.locals.is_authenticated = false;
+    req.isAuthenticated = false;
+    res.locals.isAuthenticated = false;
     
     if (clear) {
         res.clearCookie(config.cookieName);
@@ -76,7 +77,7 @@ function unauthenticated(req, res, next, clear = true) {
 }
 
 function checkAuthenticated(req, res, next) {
-    if (req.is_authenticated) {
+    if (req.isAuthenticated) {
         next();
     } else {
         res.redirect(config.redirectUnauthenticated);
@@ -84,7 +85,7 @@ function checkAuthenticated(req, res, next) {
 }
 
 function checkNotAuthenticated(req, res, next) {
-    if (! req.is_authenticated) {
+    if (! req.isAuthenticated) {
         next();
     } else {
         res.redirect(config.redirectAuthenticated);
