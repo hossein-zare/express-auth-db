@@ -93,6 +93,7 @@ function checkNotAuthenticated(req, res, next) {
 }
 
 module.exports = {
+    config,
     setup,
     login,
     logout,

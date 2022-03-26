@@ -8,6 +8,7 @@ export function unauthenticated(req: Request, res: Response, next: NextFunction,
 export function checkAuthenticated(req: Request, res: Response, next: NextFunction): void;
 export function checkNotAuthenticated(req: Request, res: Response, next: NextFunction): void;
 export function setup(opt: Opt): void;
+export const config: Opt;
 
 interface Opt {
     cookieName?: string,
