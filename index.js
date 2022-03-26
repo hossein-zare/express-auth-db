@@ -97,6 +97,8 @@ module.exports = {
     login,
     logout,
     authenticate,
+    authenticated,
+    unauthenticated,
     checkAuthenticated,
     checkNotAuthenticated
 };
